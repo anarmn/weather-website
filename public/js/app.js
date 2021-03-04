@@ -9,24 +9,11 @@ fetch('https://puzzle.mead.io/puzzle').then((response)=>{
     })
 })
 
-fetch("http://localhost:3000/weather?adress=,,,,,,,").then((response)=>{
-    response.json().then((data)=>{
-        if (data.errorText){
-            console.log(data.errorText)
-        }else {
-            console.log(data.location)
-            console.log(data.forecast)
-        }
-    })
-})
 
 const weaherForm = document.querySelector('form')
 const searchLocation = document.querySelector('input')
 const messageOne = document.querySelector('#message-one')
 const messageTwo = document.querySelector('#message-two')
-
-
-
 
 weaherForm.addEventListener('submit', (e)=>{
     e.preventDefault();
@@ -34,7 +21,9 @@ weaherForm.addEventListener('submit', (e)=>{
     messageOne.textContent='Loading...';
     messageTwo.textContent='';
     const location = searchLocation.value;
-    fetch("http://localhost:3000/weather?adress="+location).then((response)=>{
+    // am pus doar / pt ca atunci cand rulam local, 
+    //se intra automat pe localhost, si daca rulam de pe net se intra pe url ul serverelor heroku
+    fetch("/weather?adress="+location).then((response)=>{
     response.json().then((data)=>{
         if (data.errorText){
             messageOne.textContent=data.errorText;

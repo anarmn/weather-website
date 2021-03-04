@@ -16,6 +16,7 @@ console.log(__filename) //path-ul de la fisierul curent
 
 
 const app = express()
+const port =process.env.PORT || 3000 //portul va fi dat de heroku/cloud sau 3000 cand lucram local
 
 //define paths for express config
 const publicDirectoryPath = path.join(__dirname, '../public')
@@ -77,7 +78,7 @@ app.get('/weather', (req, res) =>{
            res.send({
             forecast: forecastData,
             location: data.location,
-            adress: req.query.adress
+            adress: req.query .adress
         })
          })
     })
@@ -124,6 +125,6 @@ app.get('*', (req, res)=> {
     })
 })
 
-app.listen(3000, () =>{
-    console.log('Server is up on port 3000')
+app.listen(port, () =>{
+    console.log('Server is up on port ' + port)
 }) 
